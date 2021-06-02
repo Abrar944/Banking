@@ -83,7 +83,7 @@ var payment = "";
                 res.sendFile(__dirname+"/Error.html");
             }
             else{
-                res.render("payment",{maxamt: s});
+                res.render("payment",{maxamt: cb});
 
             }
            
