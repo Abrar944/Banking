@@ -9,7 +9,7 @@
 <body>
     <h2>Enter the payment</h2>
     <form action="/pay" method="post">
-    <input type="number" name='amount' placeholder="Rupees" min="1" max="<%= %>">
+    <input type="number" name='amount' placeholder="Rupees" min="1" max="<%=maxamt %>">
     <button type="submit">Pay</button>
 
 
