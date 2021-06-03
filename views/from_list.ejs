@@ -12,29 +12,18 @@
 
 
     <form action="/to_list" method="post">
-        <input type="radio" name="from" value="<%=Cust1%>">
-        <label for="male"><%=Cust1%></label><br>
-        <input type="radio" name="from" value="<%=Cust2%>">
-        <label for="male"><%=Cust2%></label><br>
-        <input type="radio" name="from" value="<%=Cust3%>">
-        <label for="male"><%=Cust3%></label><br>
+
+        <% if(Custlist.length > 0 ) {  %>
+            <% Custlist.forEach(e => { %>
+                <input type="radio" name="from" value="<%=e.Name%>">
+                <label for="male"><%=e.Name%></label><br>
+         <%   }); } %>
+
+
         <hr>
         <button type="submit" name="submit">Next</button>
     
     </form>
-<!-- <div>
-
-    <button><%= Cust1 %> </button>
-    <button><%= Cust2 %> </button>
-    <button><%= Cust3 %> </button>
-
-</div> -->
-<!-- <script>
-    function fun(){
-        var res = document.getElementById("io").value;
-        console.log(res);
-    };
-</script> -->
 
 </body>
 </html>

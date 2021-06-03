@@ -35,12 +35,7 @@ app.get('/from_list', function (req, res,html) {
     con.query( sql, function (err, result,f) {
       if (err) throw err;
       //var cust = result[0].Name;
-      res.render("from_list",{
-        Cust1 : result[0].Name,
-        Cust2 : result[1].Name,
-        Cust3 : result[2].Name
-
-    });
+      res.render("from_list",{ Custlist : result });
   });
  });
 
