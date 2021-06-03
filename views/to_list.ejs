@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1>Welcome <%= admin %>!</h1>
+    
+    <h3>Your Acc Balance is <%= Balance[0].CurrBal %></h3>
+
     <h1>Whom you would like to transfer money</h1>
     <form action="/payment" method="post">
         <% if(Custlist.length > 0 ) {  %>
@@ -19,6 +22,8 @@
          <%   }); } %>
         <hr>
         <button type="submit" name="submit">Next</button>
+
+
     
     </form>
 

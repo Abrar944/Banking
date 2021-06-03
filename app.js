@@ -1,10 +1,9 @@
 const express = require("express")
 const app  = express();
 const mysql = require('mysql');
-// const bodyParser = require("body-parser")
 app.set('view engine', 'ejs');
 
-
+//express body-parser built in
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
@@ -15,22 +14,22 @@ var con = mysql.createConnection({
     password: "",
     database: 'banking'
   });
-  
+
+//Connecting to db
 con.connect(function(err) {
     if (err) console.log(err);
     console.log("Connected!");
 });   
 
-//HOME PAGE REDIRECT
+//HOME PAGE 
 app.get("/", function(req,res){
     res.sendFile(__dirname+'/home.html');
 })
+
 var sql = "SELECT Name FROM customers";
 
-//FROM_LIST PAGE
+//Login as PAGE
 app.get('/from_list', function (req, res,html) {
-
-
     //query in first arg
     con.query( sql, function (err, result,f) {
       if (err) throw err;
@@ -39,15 +38,12 @@ app.get('/from_list', function (req, res,html) {
   });
  });
 
-
-//TO_LIST PAGE
-//    app.get('/to_list', function (req, res,html) {
-//     res.render("to_list",{});
-//    });
+//Variables for tracking the sender,receiver and amt
 var from_id = "";
 var to_id = "";
 var payment = "";
 
+//Selecting whom to pay PAGE
    app.post("/to_list", function (req, res) {   
     //res.render("to_list",{iam : req.from_name});
     from_id = req.body.from;
@@ -57,15 +53,21 @@ var payment = "";
         con.query( sql, function (err, result,f) {
             if (err) throw err;
             //var cust = result[0].Name;
+            var g = "SELECT CurrBal FROM customers WHERE Name = '" + from_id + "'";
+          con.query(g,function (err,bal) {
+            if(err) throw err;
+
             res.render("to_list",{
-                admin : req.body.from,
-                Custlist : result
-      
+              admin : req.body.from,
+              Custlist : result,
+              Balance : bal
+              
+            });
           });
         });
         });
     
-    //how much Payment logic
+    //Payment PAGE
    app.post('/payment', function (req, res) {
        var s = "SELECT CurrBal FROM `customers` WHERE Name = '"+ from_id+"'";
        con.query( s, function (err, result) {
@@ -85,13 +87,15 @@ var payment = "";
         });
    });
 
-   //Final Pay Page Logic        
+   //FINAL PAGE and all DB updation logic       
    app.post('/pay', function (req, res) {
     res.sendFile(__dirname+"/pay.html");
     console.log(req.body.amount);
     payment = req.body.amount;
 
     console.log("Paid by " + from_id +" "+ payment + " ,to "+ to_id);
+
+    //Inserting data in transfers table
     var query = "INSERT INTO transfers (sender,reciever,transaction) VALUES ('"+from_id+"','"+to_id+"','"+payment+"')";
     con.query( query, function (err, result,f) {
         if (err) throw err;
@@ -99,7 +103,7 @@ var payment = "";
   
       });
 
-      //For removing money from the acc to transfer
+      //For removing money from the acc to transfer (Customer Table)
       var q = "SELECT CurrBal FROM `customers` WHERE Name = '"+ from_id+"'";
       con.query( q, function (err, result) {
         if (err) throw err;
@@ -117,7 +121,7 @@ var payment = "";
 
 
 
-      //For adding money into acc of other person
+      //For adding money into acc of other person (Customer Table)
       var seequery = "SELECT CurrBal FROM `customers` WHERE Name = '"+ to_id+"'";
       con.query( seequery, function (err, result) {
         if (err) throw err;
