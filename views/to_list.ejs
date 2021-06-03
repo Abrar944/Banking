@@ -10,12 +10,13 @@
     <h1>Welcome <%= admin %>!</h1>
     <h1>Whom you would like to transfer money</h1>
     <form action="/payment" method="post">
-        <input type="radio" name="to" value="<%=Cust1%>">
-        <label for="male"><%=Cust1%></label><br>
-        <input type="radio" name="to" value="<%=Cust2%>">
-        <label for="male"><%=Cust2%></label><br>
-        <input type="radio" name="to" value="<%=Cust3%>">
-        <label for="male"><%=Cust3%></label><br>
+        <% if(Custlist.length > 0 ) {  %>
+            <% Custlist.forEach(e => { %>
+                <% if(e.Name != admin) {%>
+                <input type="radio" name="to" value="<%=e.Name%>">
+                <label for="male"><%=e.Name%></label><br>
+                <% } %>
+         <%   }); } %>
         <hr>
         <button type="submit" name="submit">Next</button>
     

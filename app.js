@@ -59,9 +59,7 @@ var payment = "";
             //var cust = result[0].Name;
             res.render("to_list",{
                 admin : req.body.from,
-              Cust1 : result[0].Name,
-              Cust2 : result[1].Name,
-              Cust3 : result[2].Name
+                Custlist : result
       
           });
         });
@@ -105,8 +103,10 @@ var payment = "";
       var q = "SELECT CurrBal FROM `customers` WHERE Name = '"+ from_id+"'";
       con.query( q, function (err, result) {
         if (err) throw err;
-        console.log("Before CurrBal" + result[0].CurrBal);
+        console.log("Bal of sender: " + from_id + " before ₹"+ result[0].CurrBal +"/-" );
         var newamt = Number(result[0].CurrBal) - Number(payment);
+        console.log("Bal of sender: " + from_id + " after ₹"+ newamt+"/-");
+
         var y = "UPDATE customers SET CurrBal = '"+newamt+"' WHERE Name = '"+from_id+"'";
         con.query( y, function (err, result) {
             if (err) throw err;
@@ -121,8 +121,9 @@ var payment = "";
       var seequery = "SELECT CurrBal FROM `customers` WHERE Name = '"+ to_id+"'";
       con.query( seequery, function (err, result) {
         if (err) throw err;
-        console.log("Before CurrBal" + result[0].CurrBal);
+        console.log("Bal of Reciever: " +to_id+" before ₹"+ result[0].CurrBal + "/- ");
         var newPay = Number(result[0].CurrBal) + Number(payment);
+        console.log("Bal of Reciever: " +to_id+" after ₹"+ newPay + "/- ");
         var upquery = "UPDATE customers SET CurrBal = '"+newPay+"' WHERE Name = '"+to_id+"'";
         con.query( upquery, function (err, result,f) {
             if (err) throw err;
