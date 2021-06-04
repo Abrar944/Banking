@@ -3,6 +3,8 @@ const app  = express();
 const mysql = require('mysql');
 app.set('view engine', 'ejs');
 
+const port = process.env.PORT || 3000;
+
 //express body-parser built in
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -142,7 +144,7 @@ var payment = "";
     
 
 //SERVER OPEN
-app.listen(3000,()=>{
-    console.log("Server Started");
+app.listen(port,()=>{
+    console.log(`Server Started at ${port}`);
 
 })
