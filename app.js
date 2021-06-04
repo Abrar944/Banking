@@ -29,9 +29,9 @@ app.get("/", function(req,res){
 var sql = "SELECT Name FROM customers";
 
 //Login as PAGE
-app.get('/from_list', function (req, res,html) {
+app.get('/from_list', function (req, res) {
     //query in first arg
-    con.query( sql, function (err, result,f) {
+    con.query( sql, function (err, result) {
       if (err) throw err;
       //var cust = result[0].Name;
       res.render("from_list",{ Custlist : result });
