@@ -142,6 +142,9 @@ var payment = "";
 
     });
     
+app.get("*",(req,res) => {
+    res.render("error404");
+})
 
 //SERVER OPEN
 app.listen(port,()=>{
