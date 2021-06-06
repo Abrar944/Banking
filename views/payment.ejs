@@ -5,14 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <h2>Enter the payment</h2>
-    <form action="/pay" method="post">
-    <input type="number" name='amount' placeholder="Rupees" min="1" max="<%= maxamt %>">
-    <button type="submit">Pay</button>
 
-
+    <form action="/pay" method="post" class="mx-auto" style="margin-top: 9%;">
+        <div class="card mx-auto mt-5" style="width: 18rem; align-items:stretch;">
+        <div class="card-header">
+            <h6 style="text-align: center;">Amount</h6>
+        </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <input type="number" class="form-control" name='amount' placeholder="Rupees" min="1" max="<%= maxamt %>">
+                </li>
+                <button type="submit" class="btn btn-primary btn-lg">Pay</button>
+        </div>
     </form>
+
+    
 </body>
 </html>
