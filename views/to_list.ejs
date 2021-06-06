@@ -5,13 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To list</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-    <h1>Welcome <%= admin %>!</h1>
-    
-    <h3>Your Acc Balance is <%= Balance[0].CurrBal %></h3>
+<body >
+    <!-- <h1>Welcome <%= admin %>!</h1> -->
+   <div class="jumbotron " style="margin-top: 7%; background-color: white;">
+       <h1 class="display-3">Welcome <%= admin %>!</h1>
+       <p class="lead">from Node Bank</p>
+        <h3>Your Acc Balance is <%= Balance[0].CurrBal %>/-</h3>
+   </div> 
 
-    <h1>Whom you would like to transfer money</h1>
+    <!-- <h1>Whom you would like to transfer money</h1>
     <form action="/payment" method="post">
         <% if(Custlist.length > 0 ) {  %>
             <% Custlist.forEach(e => { %>
@@ -21,11 +25,25 @@
                 <% } %>
          <%   }); } %>
         <hr>
-        <button type="submit" name="submit">Next</button>
+        <button type="submit" name="submit">Next</button> -->
 
-
-    
-    </form>
+        <form action="/payment" method="post"  style="width: 286px; position:absolute; top: 0; right: 0; margin-top: 12%;
+        margin-right: 15%; ">
+            <div class="card"  style="width: 25rem; align-items:stretch; ">
+                <div class="card-header">
+                    <h1 style="text-align: center;">Transfer to</h1>
+                </div>
+            <ul class="list-group list-group-flush">
+            
+            <% if(Custlist.length > 0 ) {  %>
+                <% Custlist.forEach(e => { %>
+                <% if(e.Name != admin) {%>
+           <li class="list-group-item"><button type="submit" class="btn btn-block btn-lg btn-outline-primary" name="to" value="<%=e.Name%>"><%=e.Name%></button></li>
+                <% } %>
+            <%   }); } %>
+        </ul>
+        </div>
+        </form>
 
 </body>
 </html>
