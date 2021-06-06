@@ -1,7 +1,7 @@
 {
   "name": "banking_project",
   "version": "1.0.0",
-  "engines" : {
+  "engines": {
     "node": "12.18.3"
   },
   "description": "",
@@ -12,7 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "body-parser": "^1.19.0",
+    "bootstrap": "^5.0.1",
+    "bootstrap-icons": "^1.5.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "mysql": "^2.18.1"
