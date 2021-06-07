@@ -15,7 +15,7 @@
    <div class="jumbotron " style="margin-top: 7%; background-color: transparent;">
        <h1 class="display-3">Welcome <%= admin %>!</h1>
        <p class="lead">from Node Bank</p>
-        <h3>Your Acc Balance is <%= Balance[0].CurrBal %>/-</h3>
+        <h3>Your Acc Balance is <%= Balance%>/-</h3>
    </div> 
 
     <!-- <h1>Whom you would like to transfer money</h1>
@@ -46,7 +46,20 @@
             <%   }); } %>
         </ul>
         </div>
-        </form>
+    </form>
+
+    
+    
+    
+    <form style="margin-left: 2%;" action="/to_list" method="post">
+        <h3>Add money to your Account </h3>
+        <input type="hidden" style="display:hidden;"   name="from" value="<%=admin%>" id="">
+
+        <div class="form-group">
+        <input type="number" name="amt" placeholder="Rupees" oninput="validity.valid||(value='')">
+        </div>
+        <button class="btn btn-lg btn-primary"type="submit">Add money</button>
+    </form>
 
 </body>
 </html>

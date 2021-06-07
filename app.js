@@ -50,24 +50,34 @@ var payment = "";
     //res.render("to_list",{iam : req.from_name});
     from_id = req.body.from;
     console.log("Logged In as "+ req.body.from);
-
         //query in first arg
-        con.query( sql, function (err, result,f) {
+        con.query( sql, function (err, result) {
             if (err) throw err;
             //var cust = result[0].Name;
-            var g = "SELECT CurrBal FROM customers WHERE Name = '" + from_id + "'";
+         var g = "SELECT CurrBal FROM customers WHERE Name = '" + from_id + "'";
           con.query(g,function (err,bal) {
             if(err) throw err;
+
+           var newamt = bal[0].CurrBal; 
+            if(req.body.amt)
+            {  newamt = Number(req.body.amt)+Number(bal[0].CurrBal); 
+                var upt= "UPDATE `customers` SET CurrBal="+newamt+" WHERE Name = '"+ from_id+"'";
+              con.query(upt,(err, m)=>{
+                if(err) throw err;
+                })
+                
+
+            } 
 
             res.render("to_list",{
               admin : req.body.from,
               Custlist : result,
-              Balance : bal
+              Balance : newamt,
               
             });
           });
         });
-        });
+  });
     
     //Payment PAGE
    app.post('/payment', function (req, res) {
@@ -137,7 +147,6 @@ var payment = "";
             
         });
       });
-
 
 
     });

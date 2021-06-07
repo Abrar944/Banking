@@ -4,4 +4,7 @@
 
 OPTIONAL
 >add money to any acc
+>add user
+>show curr bal of all acc
+>show transactions
 
