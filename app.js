@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000;
 //express body-parser built in
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(express.static("public"));
 
 //DATABASE CHECK
 var con = mysql.createConnection({
@@ -65,8 +66,6 @@ var payment = "";
               con.query(upt,(err, m)=>{
                 if(err) throw err;
                 })
-                
-
             } 
 
             res.render("to_list",{
@@ -91,7 +90,6 @@ var payment = "";
             }
             else{
                 res.render("payment",{maxamt: cb});
-
             }
            
            to_id = req.body.to;
@@ -147,8 +145,6 @@ var payment = "";
             
         });
       });
-
-
     });
     
 app.get("*",(req,res) => {
@@ -158,5 +154,4 @@ app.get("*",(req,res) => {
 //SERVER OPEN
 app.listen(port,()=>{
     console.log(`Server Started at ${port}`);
-
 })
